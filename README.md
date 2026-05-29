@@ -17,7 +17,11 @@ Radu, A.-F., & Bungau, S. G. (2021). Management of Rheumatoid Arthritis: An Over
 ## 🔬 Methode
 Voor dit onderzoek is gebruikgemaakt van RNA-seq data afkomstig uit synoviumbiopten van zowel gezonde controles als patiënten met vastgestelde RA. De bio-informatica analyse is uitgevoerd in R Studio met een gestandaardiseerde pijplijn. De ruwe reads zijn uitgelijnd op het humane referentiegenoom (hg38) met behulp van het pakket Rsubread. Voor de kwaliteitscontrole en datamanipulatie zijn tools als Rsamtools, readr en dplyr ingezet.
 De statistische analyse van differentiële genexpressie is uitgevoerd met DESeq2, waarbij een count-matrix op genniveau als input diende. Om biologische betekenis aan de resultaten te geven, is een Gene Ontology (GO) verrijkingsanalyse uitgevoerd met goseq, waarbij gecorrigeerd is voor gene length bias. Biochemische signaalroutes zijn gevisualiseerd via de pathview en KEGGREST pakketten, met een specifieke focus op de "Rheumatoid Arthritis" pathway (hsa05323). 
-![image]([https://github.com/Frankd3v/casus_transcriptomics/blob/main/flowchart.png])
+<p align="center">
+  <img src="flowchart.png" alt="Flow" width="600"/>
+  
+  <em>Figuur 1: Flowchart van de uitgevoerde methode</em>
+</p>
 figuur 1: flowchart van methode
 ## 📊 Resultaten
 De analyse identificeerde een significant aantal genen die verschillend tot expressie komen (DEGs). In de volcanoplot vallen genen als SRGN, BCL2A1 en PTGFR op door hun sterke opregulatie bij RA-patiënten. Specifiek onderzoek naar biomarkers toonde aan dat het gen PTGDS, betrokken bij de productie van prostaglandine D2, verhoogd tot expressie komt, wat wijst op een actieve rol in de chronische ontstekingsreactie.
