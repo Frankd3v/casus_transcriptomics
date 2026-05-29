@@ -1,71 +1,27 @@
-# transcriptomics jaar 2
+# Transcriptomics-analyse van Reumatoïde Artritis: Inzichten in differentiële genexpressie en biomarkers
+## 📁 Inhoud en Structuur
+Data/Raw: Bevat de ruwe RNA-sequencing data (FASTQ/ZIP).
+Data/Processed: Verwerkte datasets en count-matrices.
+Data/Stewardship: Documentatie over databeheer en reproduceerbaarheid.
+Scripts: R-scripts voor uitlijning, statistische analyse en visualisatie.
+Resultaten: Grafieken (Volcanoplots, GO-plots) en KEGG-pathways.
+Assets: Documentatie zoals het flowschema van de analyse.
 
-# Transcriptomics Analyse: Differentieels Expressieonderzoek naar Reumatoïde Artritis (RA)
-## 📁 Inhoudsopgave
-1. Introductie & Achtergrond
-2. Doel van het Onderzoek
-3. Materiaal & Methoden
-4. Resultaten
-5. Conclusie & Discussie
-6. Data Stewardship & Repositorystructuur
-
-## 🧠 Introductie & Achtergrond
-Reumatoïde artritis (RA) is een chronische auto-immuunziekte die wereldwijd bij ongeveer 1% van de bevolking voorkomt. De aandoening kenmerkt zich door chronische inflammatie van het gewrichtsslijmvlies (synovium), met name in de handen en voeten. Dit leidt tot progressieve gewrichtsschade, pijn, stijfheid en uiteindelijk tot weefselschade of invaliditeit.
-Hoewel de exacte etiologie nog onbekend is, speelt een complexe interactie tussen genetische factoren (zoals specifieke HLA-DRB1-allelen) en omgevingsfactoren (zoals roken) een cruciale rol. Vroege detectie en behandeling zijn essentieel om gewrichtsschade bij tot wel 90% van de patiënten drastisch te beperken. Omdat het ziektebeeld en de symptomen per patiënt sterk variëren, is het identificeren van betrouwbare, vroege biomarkers een grote uitdaging binnen de reumatologie.
-
-## 🎯 Doel van het Onderzoek
-Het doel van dit transcriptomics-onderzoek is het identificeren van genen die significant hoger of lager tot expressie komen in het synoviumweefsel van RA-patiënten in vergelijking met gezonde controles. Daarnaast beoogt deze studie inzicht te krijgen in de specifieke biologische processen en metabole/biochemische pathways die door deze expressieverschillen worden ontregeld.
-
-## 🧬 Materiaal & Methoden
-### Dataset en Monsters
-Voor deze analyse is gebruikgemaakt van RNA-sequencingdata (FASTQ-bestanden) afkomstig uit synoviumbiopten van acht vrouwelijke individuen:
-4 x RA-patiënten: Diagnose $> 12$ maanden (established RA), ACPA-positief (anti-CCP).
-4 x Gezonde controles: ACPA-negatief.
-### Bioinformatische Pipeline (R-pakketten)
-De transcriptomics-pipeline is volledig uitgevoerd in R Studio met de volgende core packages:
-Data-preparatie & Alignment: Rsubread voor het indexeren van het humane referentiegenoom (hg38/RefSeq GCF_000001405.26) en het uitlijnen van de ruwe reads (align()).
-Quantificatie: Rsubread::featureCounts voor het genereren van de count-matrix op exon-niveau met behulp van een bijbehorende GTF-annotatie.
-BAM-verwerking: Rsamtools voor het sorteren en indexeren van de gegenereerde alignment-bestanden.
-Differentiële Expressie Analyse: DESeq2 voor de statistische bepaling van de genexpressieverschillen tussen de RA- en de controlegroep.
-Gen-ID Conversie: org.Hs.eg.db voor de mapping tussen gen-symbolen en ENTREZ ID's.
-Functionele Annotatie & Verrijking: * goseq (inclusief geneLenDataBase) voor Gene Ontology (GO) verrijkingsanalyse met ingebouwde correctie voor genlengte-bias.clusterProfiler en KEGGREST voor het identificeren van biologische pathways.
-Visualisatie: EnhancedVolcano (volcano plots), pathview (visuele mapping op KEGG-pathwaykaarten) en ggplot2 (GO-barplots).
-
+## 🧠 Inleiding
+Reumatoïde artritis (RA) is een chronische, complexe en systemische auto-immuunziekte die wereldwijd tussen de 0,5% en 1% van de bevolking treft. De aandoening wordt gekenmerkt door aanhoudende gewrichtsontsteking die, indien onbehandeld, leidt tot onomkeerbare schade aan bot en kraakbeen. Hoewel de exacte oorzaak nog niet volledig is opgehelderd, wordt aangenomen dat RA een multifactoriële etiologie heeft waarbij genetische predispositie, omgevingsfactoren en epigenetische modificaties een rol spelen (Radu & Bungau, 2021). Mensen met RA hebben bovendien een significant verhoogd risico op mortaliteit door comorbiditeiten zoals hart- en vaatziekten en infecties.
+Recente ontwikkelingen in next-generation sequencing maken het mogelijk om een globaal beeld te krijgen van het transcriptoom in aangedaan weefsel, wat essentieel is voor het begrijpen van de ziektemechanismen. Dit onderzoek is gericht op het onderzoeken van genexpressieprofielen in synoviaal weefsel om aanzienlijke verschillen tussen gezonde mensen en patiënten met reumatoïde artritis te identificeren. Het streven is om bepaalde biomarkers en verstoorde signaleringsroutes te herkennen, wat kan helpen bij het stellen van een eerdere diagnose en het ontwikkelen van op maat gemaakte behandelmethoden.
+Gebruikte bronnen in deze inleiding:
+Gabriel, S. E. (2001). The epidemiology of rheumatoid arthritis. Rheumatic Disease Clinics of North America, 27(2), 269–281.
+Platzer, A., Nussbaumer, T., Karonitsch, T., Smolen, J. S., & Aletaha, D. (2019). Analysis of gene expression in rheumatoid arthritis and related conditions offers insights into sex-bias, gene biotypes and co-expression patterns. PLoS ONE, 14(7), e0219698.
+Radu, A.-F., & Bungau, S. G. (2021). Management of Rheumatoid Arthritis: An Overview. Cells, 10(11), 2857.
+## 🔬 Methode
+Voor dit onderzoek is gebruikgemaakt van RNA-seq data afkomstig uit synoviumbiopten van zowel gezonde controles als patiënten met vastgestelde RA. De bio-informatica analyse is uitgevoerd in R Studio met een gestandaardiseerde pijplijn. De ruwe reads zijn uitgelijnd op het humane referentiegenoom (hg38) met behulp van het pakket Rsubread. Voor de kwaliteitscontrole en datamanipulatie zijn tools als Rsamtools, readr en dplyr ingezet.
+De statistische analyse van differentiële genexpressie is uitgevoerd met DESeq2, waarbij een count-matrix op genniveau als input diende. Om biologische betekenis aan de resultaten te geven, is een Gene Ontology (GO) verrijkingsanalyse uitgevoerd met goseq, waarbij gecorrigeerd is voor gene length bias. Biochemische signaalroutes zijn gevisualiseerd via de pathview en KEGGREST pakketten, met een specifieke focus op de "Rheumatoid Arthritis" pathway (hsa05323). 
+https://github.com/Frankd3v/casus_transcriptomics/blob/main/flowchart.png
+figuur 1: flowchart van methode
 ## 📊 Resultaten
-
-### 1. Differentiële Genexpressie (Volcano Plot)
-De analyse met DESeq2 (gevisualiseerd via EnhancedVolcano) toont een duidelijk profiel van genen die significant verschillend gereguleerd zijn tussen RA-patiënten en de controlegroep. Opvallend is dat de volcano-plot in de totale distributie een groter aantal downregulated genen laat zien dan upregulated genen.
-De top meest opvallende genen zijn:
-Sterkste Overexpressie (Upregulated): MTND5P5 (gekoppeld aan verhoogde inflammatie en RA-risico bij vrouwen), KRT14 (botreparatie/respons op schade), AHSP (bescherming tegen oxidatieve stress), GP9 (bloedplaatjesvorming/megakaryocyten) en IGHV3-53 (productie van auto-antistoffen). Ook SRGN, BCL2A1, COL6A5 en PTGFR vertonen een significant verhoogde expressie.
-Sterkste Onderexpressie (Downregulated): HNRNPA3P6 (pseudogen-regulator), CSN2 (beïnvloed door de antioxidant Nrf2), ZNF511-PRAP1 (onderscheid tussen eigen en vreemd DNA), UTP14C (ribosoom-aanmaak) en AFM (vitamine E-transport tegen oxidatieve stress).
-### 2. Gene Ontology (GO) Verrijking
-De top biologische processen die naar voren komen uit de goseq-analyse zijn direct gerelateerd aan het immuunsysteem. Processen zoals de immuunrespons, inflammatoire reacties en lymfocytenactivatie zijn significant veranderd bij RA-patiënten.
-### 3. KEGG Pathway Analyse
-Binnen de specifieke reuma-pathway (hsa05323: Rheumatoid arthritis) en gerelateerde signaalroutes (zoals TNF-, IL-17-, en MAPK-signaalroutes) zijn kritieke ontregelingen vastgesteld:
-Verhoogde expressie (Upregulated): IL6, IL1β en MMP13. Deze genen drijven de chronische ontsteking aan en zijn direct verantwoordelijk voor kraakbeenschade en gewrichtsvernietiging. Daarnaast is RANK verhoogd, wat leidt tot overactivatie van osteoclasten (botafbraak). Ook chemokinen (CCL-familie) tonen een hogere expressie, wat de migratie van immuuncellen naar het gewricht verklaart.
-Opvallende biomarker: Het gen PTGDS (prostaglandine D2 synthase) vertoont een opvallend hoge expressie, wat een sleutelrol suggereert in de chronische ontstekingscascade en mogelijk potentie heeft als vroege biomarker.
-
-## 🛑 Conclusie & Discussie
-Dit onderzoek bevestigt dat transcriptomics een krachtige methode is om de moleculaire mechanismen achter Reumatoïde Artritis te ontrafelen. De resultaten tonen een duidelijke verschuiving in het transcriptoom van RA-patiënten, gekenmerkt door de activatie van ontstekingsbevorderende cytokines (IL6, IL1β), botafbrekende factoren (RANK), en het potentiele biomarkargen PTGDS.
-
-### Beperkingen & Aanbevelingen voor Vervolgonderzoek:
-1. Steekproefgrootte: De huidige studie is gebaseerd op een kleine populatie ($n=8$). Een grotere steekproef is noodzakelijk om de statistische power te verhogen.
-2. Patiëntdiversiteit: De huidige dataset bestaat exclusief uit vrouwelijke patiënten en kent een scheve leeftijdsverdeling tussen de controle- en behandelgroep. Vervolgonderzoek moet ook mannen en leeftijd-gematchte controles bevatten om biologische bias (zoals hormoneffecten) uit te sluiten.
-3. Pathway-breedte: De focus lag nu sterk op immuun-gerelateerde (upregulated) pathways. Toekomstig onderzoek moet ook de downregulated pathways nader onderzoeken om te begrijpen welke beschermende mechanismen onderdrukt worden.
-
-## 📁 Data Stewardship & Repositorystructuur
-
-Dit project is ingericht volgens de FAIR-dataprincipes om reproduceerbaarheid en transparantie te garanderen.
-Plaintext
-
-├── Assets/                 # Beeldmateriaal, logo's en flowcharts van het werkproces
-├── Bronnen/                # Wetenschappelijke literatuur (PDF's) ter ondersteuning van de resultaten
-├── Data/
-│   ├── Raw/                # Ruwe FASTQ sequencing data (gezipt) en patiëntkenmerken (CSV)
-│   └── Processed/          # Gealigneerde data en verwerkte datasets
-├── Data_Stewardship/       # Documentatie omtrent databeheer en -opslag conform de richtlijnen
-├── Resultaten/             # Gegenereerde plots (Volcano plot, GO-barplots, KEGG pathview-afbeeldingen)
-├── Scripts/                # Het volledige, reproduceerbare R-script (Script_R_Casus.R)
-└── README.md               # Dit document
-
-Dit project is uitgevoerd als onderdeel van het tweedejaars curriculum Transcriptomics (Jaar 2, Periode 4).
+De analyse identificeerde een significant aantal genen die verschillend tot expressie komen (DEGs). In de volcanoplot vallen genen als SRGN, BCL2A1 en PTGFR op door hun sterke opregulatie bij RA-patiënten. Specifiek onderzoek naar biomarkers toonde aan dat het gen PTGDS, betrokken bij de productie van prostaglandine D2, verhoogd tot expressie komt, wat wijst op een actieve rol in de chronische ontstekingsreactie.
+Bovendien lieten de KEGG-pathway resultaten zien dat ontstekingsbevorderende cytokines zoals IL6, IL1β en matrix-metalloproteïnasen zoals MMP13 significant overgeëxpresseerd zijn. Deze genen zijn direct gerelateerd aan kraakbeenschade en gewrichtsdestructie. Interessant is dat Platzer et al. (2019) aantonen dat bepaalde genen gerelateerd aan het cytoskelet (actinefilamenten) een omgekeerde expressieratio vertonen tussen mannen en vrouwen in vroege stadia van RA, wat wijst op een belangrijke sekse-afhankelijke component in de genexpressie. De GO-analyse bevestigde dat de meest verrijkte biologische processen gerelateerd zijn aan de immuunrespons en lymfocytenactivatie.
+## ⚡ Conclusie
+Dit onderzoek bevestigt dat transcriptomics een krachtig instrument is om de moleculaire complexiteit van Reumatoïde Artritis te ontrafelen. De identificatie van genen zoals IL6, MMP13 en de potentiële biomarker PTGDS biedt belangrijke aanknopingspunten voor het monitoren van ziekteactiviteit en het remmen van progressieve gewrichtsschade. De bevindingen onderstrepen dat RA niet slechts één enkele oorzaak heeft, maar het resultaat is van een verstoord netwerk van immuun- en ontstekingsroutes.
+Aanbevelingen:Voor vervolgonderzoek wordt aanbevolen om grotere en meer diverse patiëntengroepen te gebruiken, waarbij expliciet onderscheid wordt gemaakt naar geslacht en leeftijd om de geobserveerde sekse-bias verder te valideren. Daarnaast is het essentieel om meerdere metabole pathways te analyseren om een vollediger beeld te krijgen van zowel op- als ondergereguleerde genen in verschillende stadia van de ziekte. Een persoonlijke benadering, gebaseerd op deze genetische profielen, kan de effectiviteit van behandelingen zoals JAK-remmers of biologische DMARDs aanzienlijk verbeteren.
