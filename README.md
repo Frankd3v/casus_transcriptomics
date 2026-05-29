@@ -1,10 +1,10 @@
 # Transcriptomics-analyse van Reumatoïde Artritis: Inzichten in differentiële genexpressie en biomarkers
 ## 📁 Inhoud en Structuur
-- 'Data/Raw' -Bevat de ruwe RNA-sequencing data (FASTQ/ZIP).
-- 'Data/Processed' -Verwerkte datasets en count-matrices.
-- 'Data/Stewardship' -Documentatie over databeheer en reproduceerbaarheid.
-- 'Scripts' -R-scripts voor uitlijning, statistische analyse en visualisatie.
-- 'Resultaten' -Grafieken (Volcanoplots, GO-plots) en KEGG-pathways.
+- `Data/Raw` -Bevat de ruwe RNA-sequencing data (FASTQ/ZIP).
+- `Data/Processed` -Verwerkte datasets en count-matrices.
+- `Data/Stewardship` -Documentatie over databeheer en reproduceerbaarheid.
+- `Scripts` -R-scripts voor uitlijning, statistische analyse en visualisatie.
+- `Resultaten` -Grafieken (Volcanoplots, GO-plots) en KEGG-pathways.
 
 ## 🧠 Inleiding
 Reumatoïde artritis (RA) is een chronische, complexe en systemische auto-immuunziekte die wereldwijd tussen de 0,5% en 1% van de bevolking treft. De aandoening wordt gekenmerkt door aanhoudende gewrichtsontsteking die, indien onbehandeld, leidt tot onomkeerbare schade aan bot en kraakbeen. Hoewel de exacte oorzaak nog niet volledig is opgehelderd, wordt aangenomen dat RA een multifactoriële etiologie heeft waarbij genetische predispositie, omgevingsfactoren en epigenetische modificaties een rol spelen (Radu & Bungau, 2021). Mensen met RA hebben bovendien een significant verhoogd risico op mortaliteit door comorbiditeiten zoals hart- en vaatziekten en infecties.
