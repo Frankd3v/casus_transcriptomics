@@ -20,9 +20,9 @@ De statistische analyse van differentiële genexpressie is uitgevoerd met DESeq2
 <p align="center">
   <img src="flowchart.png" alt="Flow" width="600"/>
   
-  <em>Figuur 1: Flowchart van de uitgevoerde methode</em>
+  <em>Figuur 1: Flowchart van de methode</em>
 </p>
-figuur 1: flowchart van methode
+
 ## 📊 Resultaten
 De analyse identificeerde een significant aantal genen die verschillend tot expressie komen (DEGs). In de volcanoplot vallen genen als SRGN, BCL2A1 en PTGFR op door hun sterke opregulatie bij RA-patiënten. Specifiek onderzoek naar biomarkers toonde aan dat het gen PTGDS, betrokken bij de productie van prostaglandine D2, verhoogd tot expressie komt, wat wijst op een actieve rol in de chronische ontstekingsreactie.
 Bovendien lieten de KEGG-pathway resultaten zien dat ontstekingsbevorderende cytokines zoals IL6, IL1β en matrix-metalloproteïnasen zoals MMP13 significant overgeëxpresseerd zijn. Deze genen zijn direct gerelateerd aan kraakbeenschade en gewrichtsdestructie. Interessant is dat Platzer et al. (2019) aantonen dat bepaalde genen gerelateerd aan het cytoskelet (actinefilamenten) een omgekeerde expressieratio vertonen tussen mannen en vrouwen in vroege stadia van RA, wat wijst op een belangrijke sekse-afhankelijke component in de genexpressie. De GO-analyse bevestigde dat de meest verrijkte biologische processen gerelateerd zijn aan de immuunrespons en lymfocytenactivatie.
