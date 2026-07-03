@@ -24,9 +24,14 @@ Radu, A.-F., & Bungau, S. G. (2021). Management of Rheumatoid Arthritis: An Over
 
 ## 🔬 Methode
 
-Voor dit onderzoek is gebruikgemaakt van RNA-seq data afkomstig uit synoviumbiopten van zowel gezonde controles als patiënten met vastgestelde RA. De bio-informatica analyse is uitgevoerd in R Studio met een gestandaardiseerde pijplijn. De ruwe reads zijn uitgelijnd op het humane referentiegenoom (hg38) met behulp van het pakket Rsubread. Voor de kwaliteitscontrole en datamanipulatie zijn tools als Rsamtools, readr en dplyr ingezet.
+Om dit onderzoek uit te voeren is er RNA-sequencingdata van synoviumbiopten gebruikt afkomstig van een onderzoek van Platzer, Nussbaumer, Karonitsch, Smolen & Aletaha (2019). De data bestaat uit vier gezonde controles en vier patiënten met rheumatoïde artritis. Deze is vervolgens geanalyseerd met behulp van verschillende Bioconductorpackages in Rstudio (versie RStudio 2026.06.0+242).
 
-De statistische analyse van differentiële genexpressie is uitgevoerd met DESeq2, waarbij een count-matrix op genniveau als input diende. Om biologische betekenis aan de resultaten te geven, is een Gene Ontology (GO) verrijkingsanalyse uitgevoerd met goseq, waarbij gecorrigeerd is voor gene length bias. Biochemische signaalroutes zijn gevisualiseerd via de pathview en KEGGREST pakketten, met een specifieke focus op de "Rheumatoid Arthritis" pathway (hsa05323). 
+Het mappen van de ruwe FASTQ-bestanden op het humane referentiegenoom GRCh38 (GCF_000001405.40) is de eerst uitgevoerde stap. Dit is gedaan met behulp van het Rsubrad package (versie 2.24.0). Hierna is met de `featureCounts` functie bepaald hoeveel sequencingreads aan elk gen kunnen worden gekoppeld. Met deze informatie is achtereenvolgend een countmatrix opgesteld. [lijn 10 tot en met 54 van het script](scripts/casus_transcriptomics.R#L10-L54)
+
+Na dit gedaan te hebben is er met het DESeq2 package (versie 1.50.2) een differentiële genexpressieanalyse uitgevoerd tussen de twee groepen (controle en RA). De genen waarvan de adjusted p-waarde < 0,05 zijn worden als significant beschouwd. Deze resultaten zijn weergegeven in een volcanoplot. [lijn 56 tot en met 106 van het script](scripts/casus_transcriptomics.R#L56-L106)
+
+tot slot zijn er nog een Gene Ontology (GO) en KEGG-patwayanalyse uitgevoerd met gebruik van packages goseq (versie 1.62.0), pathview (versie 1.50.0), geneLenDataBase (versie 1.46.0) en tidyverse (versie 2.0.0) om de immuun-gerelateerde pathways en biologische processen verder te onderzoeken. Waarna deze zijn uitgezet in een dotplot met GOplot (versie 1.0.2). [lijn 108 tot en met 154 van het script](scripts/casus_transcriptomics.R#L108-L154)
+
 
 <p align="center">
   <img src="flowchart.png" alt="Flow" width="600"/>
