@@ -26,11 +26,11 @@ Radu, A.-F., & Bungau, S. G. (2021). Management of Rheumatoid Arthritis: An Over
 
 Om dit onderzoek uit te voeren is er RNA-sequencingdata van synoviumbiopten gebruikt afkomstig van een onderzoek van Platzer, Nussbaumer, Karonitsch, Smolen & Aletaha (2019). De data bestaat uit vier gezonde controles en vier patiënten met rheumatoïde artritis. Deze is vervolgens geanalyseerd met behulp van verschillende Bioconductorpackages in Rstudio (versie RStudio 2026.06.0+242).
 
-Het mappen van de ruwe FASTQ-bestanden op het humane referentiegenoom GRCh38 (GCF_000001405.40) is de eerst uitgevoerde stap. Dit is gedaan met behulp van het Rsubrad package (versie 2.24.0). Hierna is met de `featureCounts` functie bepaald hoeveel sequencingreads aan elk gen kunnen worden gekoppeld. Met deze informatie is achtereenvolgend een countmatrix opgesteld. [lijn 10 tot en met 54 van het script](scripts/casus_transcriptomics.R#L10-L54)
+Het mappen van de ruwe FASTQ-bestanden op het humane referentiegenoom GRCh38 (GCF_000001405.40) is de eerst uitgevoerde stap. Dit is gedaan met behulp van het Rsubrad package (versie 2.24.0). Hierna is met de `featureCounts` functie bepaald hoeveel sequencingreads aan elk gen kunnen worden gekoppeld. Met deze informatie is achtereenvolgend een countmatrix opgesteld. [Lijn 10 tot en met 54 van het script](scripts/casus_transcriptomics.R#L10-L54)
 
-Na dit gedaan te hebben is er met het DESeq2 package (versie 1.50.2) een differentiële genexpressieanalyse uitgevoerd tussen de twee groepen (controle en RA). De genen waarvan de adjusted p-waarde < 0,05 zijn worden als significant beschouwd. Deze resultaten zijn weergegeven in een volcanoplot. [lijn 56 tot en met 106 van het script](scripts/casus_transcriptomics.R#L56-L106)
+Na dit gedaan te hebben is er met het DESeq2 package (versie 1.50.2) een differentiële genexpressieanalyse uitgevoerd tussen de twee groepen (controle en RA). De genen waarvan de adjusted p-waarde < 0,05 zijn worden als significant beschouwd. Deze resultaten zijn weergegeven in een volcanoplot. [Lijn 56 tot en met 106 van het script](scripts/casus_transcriptomics.R#L56-L106)
 
-tot slot zijn er nog een Gene Ontology (GO) en KEGG-patwayanalyse uitgevoerd met gebruik van packages goseq (versie 1.62.0), pathview (versie 1.50.0), geneLenDataBase (versie 1.46.0) en tidyverse (versie 2.0.0) om de immuun-gerelateerde pathways en biologische processen verder te onderzoeken. Waarna deze zijn uitgezet in een dotplot met GOplot (versie 1.0.2). [lijn 108 tot en met 154 van het script](scripts/casus_transcriptomics.R#L108-L154)
+tot slot zijn er nog een Gene Ontology (GO) en KEGG-patwayanalyse uitgevoerd met gebruik van packages goseq (versie 1.62.0), pathview (versie 1.50.0), geneLenDataBase (versie 1.46.0) en tidyverse (versie 2.0.0) om de immuun-gerelateerde pathways en biologische processen verder te onderzoeken. Waarna deze zijn uitgezet in een dotplot met GOplot (versie 1.0.2). [Lijn 108 tot en met 154 van het script](scripts/casus_transcriptomics.R#L108-L154)
 
 
 <p align="center">
@@ -41,9 +41,29 @@ tot slot zijn er nog een Gene Ontology (GO) en KEGG-patwayanalyse uitgevoerd met
 
 ## 📊 Resultaten
 
-De analyse identificeerde een significant aantal genen die verschillend tot expressie komen (DEGs). In de volcanoplot vallen genen als SRGN, BCL2A1 en PTGFR op door hun sterke opregulatie bij RA-patiënten. Specifiek onderzoek naar biomarkers toonde aan dat het gen PTGDS, betrokken bij de productie van prostaglandine D2, verhoogd tot expressie komt, wat wijst op een actieve rol in de chronische ontstekingsreactie.
+Nadat de differentiële genexpressieanalyse uitgevoerd was met behulp van het DESeq2 package zijn er een significant aantal genen die verschillend tot expressie komen tussen de controle- en rheumatoïde artritis-groep gevonden. Deze genen waren zowel upregulated als downregulated waargenomen. In de volcanoplot (figuur 2) vallen genen als SRGN, BCL2A1 en PTGFR op door hun sterke upregulatie bij RA-patiënten.
 
-Bovendien lieten de KEGG-pathway resultaten zien dat ontstekingsbevorderende cytokines zoals IL6, IL1β en matrix-metalloproteïnasen zoals MMP13 significant overgeëxpresseerd zijn. Deze genen zijn direct gerelateerd aan kraakbeenschade en gewrichtsdestructie. Interessant is dat Platzer et al. (2019) aantonen dat bepaalde genen gerelateerd aan het cytoskelet (actinefilamenten) een omgekeerde expressieratio vertonen tussen mannen en vrouwen in vroege stadia van RA, wat wijst op een belangrijke sekse-afhankelijke component in de genexpressie. De GO-analyse bevestigde dat de meest verrijkte biologische processen gerelateerd zijn aan de immuunrespons en lymfocytenactivatie.
+<p align="center">
+  <img src="resultaten/VolcanoplotCASUS.png" alt="Flow" width="600"/>
+  
+  <em>Figuur 2: Volcano plot van genen die differentieel tot expressie komen tussen gezonde controles en patiënten met rheumatoïde artritis</em>
+</p>
+
+Uit de GO (Geno ontology) analyse is gebleken dat meerdere van de immuun-gerelateerde biologische processen verijkt waren in de RA-groep (figuur 3). Er is in de GO-dotplot te zien dat de GO-cathegorieën die betrokken zijn bij immuunresponsen en immunoglobuline-gerelateerde processes sterk waren verrijkt. Dit kan betekenen dat antilichaam-gerelateerde processen en B-celactivatie een rol spelen bij rheumatoïde artritis.
+
+<p align="center">
+  <img src="resultaten/GO_dotplot.png" alt="Flow" width="600"/>
+  
+  <em>Figuur 3: GO-dotplot van 10 van de meest verrijkte Geno Ontology cathegorieën </em>
+</p>
+
+Ook is er een KEGG-pathwayanalyse uitgevoerd. Hierbij is de T-cell receptor pathway onderzocht met gebruik van het Pathview package in R (figuur 4). In deze pathway zijn meerdere genen positief tot expressie gebracht. Hieronder vallen onder andere de genen MHCII, IL1, MMP1/3, IL1β, CCL3, en CXCL1. Dit laat lijken dat er een verhoogde activiteit is van de T-cell receptor pathway bij patiënten van rheumatoïde artritis. De pathway ondersteunt hiermee de resultaten van de overige analyses die zijn uitgevoerd.
+
+<p align="center">
+  <img src="resultaten/hsa05323.pathview.png" alt="Flow" width="600"/>
+  
+  <em>Figuur 4: Visualisatie van de B cell receptor signaling pathway (hsa05323) </em>
+</p>
 
 ## ⚡ Conclusie
 
